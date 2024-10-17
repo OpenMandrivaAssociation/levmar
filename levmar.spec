@@ -15,7 +15,7 @@ Version:	%{major}.%{minor}
 Release:	1
 Group:		Sciences/Mathematics
 License:	GPLv2+
-URL:		http://users.ics.forth.gr/~lourakis/%{name}/
+URL:		https://users.ics.forth.gr/~lourakis/%{name}/
 Source0:	http://users.ics.forth.gr/~lourakis/%{name}/%{name}-%{version}.tgz
 Patch0:		%{name}-2.6-shared.patch
 
