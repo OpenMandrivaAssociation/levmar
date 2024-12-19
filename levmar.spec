@@ -6,13 +6,16 @@
 %define libname %mklibname %{name}
 %define devname %mklibname %{name} -d
 
+# BLAS lib
+%global blaslib flexiblas
+
 # _with = default off, _without = default on
 %bcond_without demo
 
 Summary:	Levenberg-Marquardt nonlinear least squares algorithms in C/C++
 Name:		levmar
 Version:	%{major}.%{minor}
-Release:	1
+Release:	2
 Group:		Sciences/Mathematics
 License:	GPLv2+
 URL:		https://users.ics.forth.gr/~lourakis/%{name}/
@@ -24,7 +27,7 @@ BuildRequires:	chrpath
 %if %{with demo}
 BuildRequires:	f2c
 %endif
-BuildRequires:	pkgconfig(blas)
+BuildRequires:	pkgconfig(%{blaslib})
 BuildRequires:	pkgconfig(lapack)
 
 %description
@@ -88,6 +91,7 @@ Libraries and includes files for developing programs based on %{name}.
 	-DLINSOLVERS_RETAIN_MEMORY:BOOL=OFF \
 	-DNEED_F2C:BOOL=OFF \
 	-DBUILD_DEMO:BOOL=%{?with_demo:ON}%{!?with_demo:OFF} \
+	-DLAPACKBLAS_LIB_NAMES:STRING=%{blaslib} \
 	-DLAPACKBLAS_DIR:PATH=%{_libdir} \
 	-DVERSION_MAJOR:INTEGER=%{major} \
 	-DVERSION_MINOR:INTEGER=%{minor} \
@@ -125,7 +129,7 @@ libdir=%{_libdir}
 Name: %{name}
 Description: Levenberg-Marquardt nonlinear least squares algorithms in C/C++
 Version: %{version}
-Requires:
+Requires: %{blaslib}
 Libs: -L\${libdir} -l%{name} -lm
 Cflags: -I\${includedir}
 EOF
